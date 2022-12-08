@@ -155,8 +155,10 @@ async def get_reports_(message: types.Message):
     inline_markup = types.InlineKeyboardMarkup()
     for report in reports[:current_page*4]:
         inline_markup.add(types.InlineKeyboardButton(
-            f'{report.city} {report.date.day} {report.date.month} '
-            f'{report.date.year}', callback_data=f'report_ {report.id}'
+            f'{report.city} {report.date.month}.'
+            f'{report.date.day}   '
+            f'{report.date.hour}:{report.date.minute}',
+            callback_data=f'report_ {report.id}'
         ))
     current_page += 1
     inline_markup.row(
@@ -181,8 +183,9 @@ async def callback_query(call, state: FSMContext):
         inline_markup = types.InlineKeyboardMarkup()
         for report in reports[:current_page * 4]:
             inline_markup.add(types.InlineKeyboardButton(
-                text=f'{report.city} {report.date.day}.'
-                f'{report.date.month}.{report.date.year}',
+                text=f'{report.city} {report.date.month}.'
+                     f'{report.date.day}   '
+                     f'{report.date.hour}:{report.date.minute}',
                 callback_data=f'report_{report.id}'))
         current_page += 1
         inline_markup.row(
@@ -207,8 +210,9 @@ async def callback_query(call, state: FSMContext):
                     data['current_page'] * 4 - 4:len(reports) + 1
                 ]:
                     inline_markup.add(types.InlineKeyboardButton(
-                        text=f'{report.city} {report.date.day}.'
-                             f'{report.date.month}.{report.date.year}',
+                        text=f'{report.city} {report.date.month}.'
+                             f'{report.date.day}   '
+                             f'{report.date.hour}:{report.date.minute}',
                         callback_data=f'report_ {report.id}'))
                 data['current_page'] -= 1
                 inline_markup.row(
@@ -226,8 +230,9 @@ async def callback_query(call, state: FSMContext):
                 data["current_page"] * 4 - 4:data["current_page"] * 4
             ]:
                 inline_markup.add(types.InlineKeyboardButton(
-                    text=f'{report.city} {report.date.day}.'
-                         f'{report.date.month}.{report.date.year}',
+                    text=f'{report.city} {report.date.month}.'
+                         f'{report.date.day}   '
+                         f'{report.date.hour}:{report.date.minute}',
                     callback_data=f'report_ {report.id}'))
             data['current_page'] += 1
             inline_markup.row(
@@ -250,8 +255,9 @@ async def callback_query(call, state: FSMContext):
             if data['current_page'] == 1:
                 for report in reports[0:data['current_page'] * 4]:
                     inline_markup.add(types.InlineKeyboardButton(
-                        text=f'{report.city} {report.date.day}.'
-                             f'{report.date.month}.{report.date.year}',
+                        text=f'{report.city} {report.date.month}.'
+                             f'{report.date.day}   '
+                             f'{report.date.hour}:{report.date.minute}',
                         callback_data=f'report_ {report.id}'))
                 data['current_page'] += 1
                 inline_markup.row(
@@ -269,8 +275,9 @@ async def callback_query(call, state: FSMContext):
                 data["current_page"] * 4 - 8:data["current_page"] * 4 - 4
             ]:
                 inline_markup.add(types.InlineKeyboardButton(
-                    text=f'{report.city} {report.date.day}.'
-                         f'{report.date.month}.{report.date.year}',
+                    text=f'{report.city} {report.date.month}.'
+                         f'{report.date.day}   '
+                         f'{report.date.hour}:{report.date.minute}',
                     callback_data=f'report_ {report.id}'))
             data['current_page'] -= 1
             inline_markup.row(
@@ -318,8 +325,9 @@ async def callback_query(call, state: FSMContext):
             data['current_page'] = 1
             for report in reports[0:data['current_page'] * 4]:
                 inline_markup.add(types.InlineKeyboardButton(
-                    text=f'{report.city} {report.date.day}.'
-                         f'{report.date.month}.{report.date.year}',
+                    text=f'{report.city} {report.date.month}.'
+                         f'{report.date.day}   '
+                         f'{report.date.hour}:{report.date.minute}',
                     callback_data=f'report_ {report.id}'))
             data['current_page'] += 1
             inline_markup.row(
